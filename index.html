@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolin | Tech Armor Space</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Sniglet:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-armor: #12131a; /* Dark cyber nano-suit chassis */
+            --card-bg: #1c1e24; /* Deep charcoal inner tech armor panels */
+            --comic-black: #0c0d10; /* Bold outline stroke color */
+            --spidey-red: #d62828; /* Classic hero vibrant crimson red */
+            --iron-gold: #f7b731; /* Metallic Iron Spider gold accent */
+            --web-blue: #00b4d8; /* High-tech glowing web-fluid blue */
+            --text-light: #f8f9fa; /* High contrast text */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-armor);
+            /* Glowing cyber-grid web matrix pattern */
+            background-image: 
+                linear-gradient(rgba(214, 40, 40, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(214, 40, 40, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Fredoka', sans-serif;
+            color: var(--text-light);
+            padding: 30px 20px 120px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Target Page/Tab Content Layout wrappers */
+        .page-view {
+            display: none; /* Hidden by default */
+            width: 100%;
+            max-width: 1280px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        /* Active class added via JavaScript to reveal pages */
+        .page-view.active-view {
+            display: block;
+        }
+
+        /* Responsive Dashboard Canvas Box */
+        .workspace-canvas {
+            display: grid;
+            grid-template-columns: 1.16fr 1fr 1.25fr; /* 3 main column anchors */
+            gap: 25px;
+            position: relative;
+        }
+
+        /* Standard Heavy Comic Card Style - Armored Variant */
+        .comic-card {
+            background-color: var(--card-bg);
+            border: 4px solid var(--comic-black);
+            border-radius: 24px;
+            box-shadow: 0 10px 0 var(--comic-black);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle web pattern corner accents on cards */
+        .comic-card::before {
+            content: "🕸️";
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            opacity: 0.15;
+            font-size: 1.2rem;
+        }
+
+        /* Giant Text Headers with thick comic font shadows */
+        .comic-title {
+            font-family: 'Sniglet', cursive;
+            font-size: 2.2rem;
+            color: var(--spidey-red);
+            text-align: center;
+            text-transform: uppercase;
+            -webkit-text-stroke: 1.5px var(--comic-black);
+            text-shadow: 3px 3px 0 var(--comic-black);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* ------------------------------------------------
+           TOP BANNER & NAVIGATION
+        ------------------------------------------------ */
+        .welcome-banner {
+            grid-column: 1;
+            background-color: var(--spidey-red);
+            border: 4px solid var(--comic-black);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 4px 6px 0 var(--comic-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transform: rotate(-1.5deg);
+            margin-bottom: 5px;
+        }
+
+        .welcome-banner h1 {
+            font-family: 'Sniglet', cursive;
+            font-size: 1.4rem;
+            color: #fff;
+            text-shadow: 3px 3px 0 var(--comic-black);
+            -webkit-text-stroke: 1px var(--comic-black);
+            text-align: center;
+        }
+
+        .cute-star {
+            font-size: 1.6rem;
+            color: var(--iron-gold);
+            text-shadow: 2px 2px 0 var(--comic-black);
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        /* ------------------------------------------------
+           COLUMN 1: WHO AM I (ABOUT ME)
+        ------------------------------------------------ */
+        .who-am-i-col {
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bio-subtitle {
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        /* Narrative paragraph layout for About Me details */
+        .about-text-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .about-text-content p {
+            margin-bottom: 12px;
+        }
+
+        .about-highlight {
+            color: var(--iron-gold);
+            font-weight: 600;
+        }
+
+        /* Creative Character Avatars Wrapper Box */
+        .avatar-group-graphic {
+            background: #242831;
+            border: 3px dashed #4e5565;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #8c96ab;
+            text-align: center;
+            font-size: 1rem;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .hobby-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hobby-tag {
+            background: var(--bg-armor);
+            border: 2px solid var(--comic-black);
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ------------------------------------------------
+           COLUMN 2: CENTRAL PROFILE PORTRAIT
+        ------------------------------------------------ */
+        .profile-center-col {
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-avatar-card {
+            text-align: center;
+        }
+
+        /* Central Rounded Illustration Frame */
+        .avatar-frame {
+            width: 100%;
+            max-width: 240px;
+            height: 240px;
+            border: 4px solid var(--comic-black);
+            background: radial-gradient(circle, #e63946, #1d3557);
+            border-radius: 32px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        /* Custom Vector Mockup of character with modern metallic look */
+        .avatar-vector {
+            font-size: 8rem;
+            color: var(--iron-gold);
+            margin-top: 40px;
+            filter: drop-shadow(0 0 10px rgba(247, 183, 49, 0.6));
+        }
+
+        .profile-name {
+            font-family: 'Sniglet', cursive;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            color: var(--text-light);
+            text-shadow: 2px 2px 0 var(--comic-black);
+            -webkit-text-stroke: 1px var(--comic-black);
+        }
+
+        .profile-handle {
+            font-size: 1.1rem;
+            color: var(--web-blue);
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        /* Interactive Info Block Setup */
+        .profile-info-block {
+            border-top: 3px dashed rgba(255,255,255,0.1);
+            padding-top: 15px;
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .info-pill {
+            background-color: var(--bg-armor);
+            border: 2px solid var(--comic-black);
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .info-pill i {
+            color: var(--iron-gold);
+        }
+
+        /* Functional Click Action Extensions */
+        .interactive-pill {
+            text-decoration: none;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+            cursor: pointer;
+        }
+
+        .interactive-pill:hover {
+            transform: scale(1.04);
+            border-color: var(--web-blue);
+            box-shadow: 0 4px 0 var(--comic-black);
+            color: var(--text-light);
+        }
+
+        /* ------------------------------------------------
+           COLUMN 3: TECH STACKS & ADVENTURES
+        ------------------------------------------------ */
+        .skills-adventures-col {
+            grid-column: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* What I Do Pill Badges Matrix Layout */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .skill-badge {
+            background: #242831;
+            border: 3px solid var(--comic-black);
+            padding: 12px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 3px 4px 0 var(--comic-black);
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .skill-badge i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .skill-1 i { color: var(--iron-gold); }
+        .skill-2 i { color: var(--web-blue); }
+        .skill-3 i { color: var(--spidey-red); }
+        .skill-4 i { color: #52b788; }
+
+        /* Project Cards Dynamic Presentation row */
+        .adventures-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .project-row-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #242831;
+            border: 3px solid var(--comic-black);
+            padding: 12px 18px;
+            border-radius: 18px;
+            box-shadow: 3px 4px 0 var(--comic-black);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .project-row-item:hover {
+            transform: scale(1.02);
+            box-shadow: 3px 4px 0 var(--web-blue);
+        }
+
+        .project-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            border: 2px solid var(--comic-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--comic-black);
+        }
+
+        .project-info h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+        .project-info p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* ------------------------------------------------
+           PROJECTS PAGE SPECIFIC MATRIX
+        ------------------------------------------------ */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        /* ------------------------------------------------
+           STICKY BOTTOM FOOTER NAVIGATION TAB BAR
+        ------------------------------------------------ */
+        .sticky-dock-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--spidey-red);
+            border: 4px solid var(--comic-black);
+            border-radius: 50px;
+            padding: 8px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 0 var(--comic-black);
+            z-index: 100;
+        }
+
+        .dock-btn {
+            background: none;
+            border: none;
+            font-family: 'Sniglet', cursive;
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 1.5px 1.5px 0 var(--comic-black);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 20px;
+            transition: all 0.15s;
+        }
+
+        .dock-btn:hover, .dock-btn.active-tab {
+            background-color: var(--iron-gold);
+            color: var(--comic-black);
+            text-shadow: none;
+            transform: scale(1.1) rotate(-2deg);
+        }
+
+        .visitor-pill {
+            background: var(--comic-black);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Mobile Breakpoint adjustment */
+        @media (max-width: 968px) {
+            .workspace-canvas {
+                grid-template-columns: 1fr;
+            }
+            .who-am-i-col, .profile-center-col, .skills-adventures-col {
+                grid-column: 1;
+            }
+            .sticky-dock-nav {
+                width: 90%;
+                justify-content: center;
+                flex-wrap: wrap;
+                border-radius: 24px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="about-page" class="page-view active-view">
+        <div class="workspace-canvas">
+            
+            <div class="who-am-i-col">
+                <div class="welcome-banner">
+                    <span class="cute-star">★</span>
+                    <h1>SYSTEMS ONLINE // CREATIVE SPACE</h1>
+                </div>
+
+                <div class="comic-card">
+                    <h3 class="comic-title" style="color: var(--iron-gold);">ABOUT ME</h3>
+                    <p class="bio-subtitle">Creative Explorer, Developer &amp; Logic Solver</p>
+                    
+                    <div class="about-text-content">
+                        <p>Hey there! I'm <span class="about-highlight">Dolin</span>, a developer and logic solver from Kottayam, Kerala, India. I am now a college student practicing <span class="about-highlight">Electronics and Communication Engineering</span>. I balance a deep analytical focus on Elecronics and work on creating interesting tech gadgets with creative application building.</p>
+                        <p>My tech stack primarily targets creating custom standalone tools using Python, crafting interfaces with Tkinter, and exploring deployment strategies like PyInstaller packaging alongside web app dashboards in Streamlit.</p>
+                    </div>
+                    
+                    <div class="avatar-group-graphic">
+                        <span style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; color: var(--web-blue);">Core Elements</span>
+                        <div class="hobby-row">
+                            <div class="hobby-tag">
+                                <i class="fa-solid fa-keyboard"></i> Keyboardist
+                            </div>
+                            <div class="hobby-tag">
+                                <i class="fa-solid fa-microchip"></i> Electronics
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-center-col">
+                <div class="comic-card main-avatar-card">
+                    <div class="avatar-frame">
+                        <i class="fa-solid fa-user-astronaut avatar-vector"></i>
+                    </div>
+                    <h2 class="profile-name">DOLIN</h2>
+                    <p class="profile-handle">@itz._me_dolin</p>
+
+                    <div class="profile-info-block">
+                        <div class="info-pill">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>contact@dolinbibinkuriakose.com</span>
+                        </div>
+                        <a href="https://www.instagram.com/itz._me_dolin" target="_blank" class="info-pill interactive-pill">
+                            <i class="fa-brands fa-instagram"></i>
+                            <span>itz._me_dolin</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-adventures-col">
+                <div class="comic-card">
+                    <h3 class="comic-title" style="color: var(--iron-gold);">WHAT I DO?</h3>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-badge skill-1">
+                            <i class="fa-solid fa-microchip"></i>
+                            ECE Engineering Student
+                        </div>
+                        <div class="skill-badge skill-2">
+                            <i class="fa-brands fa-python"></i>
+                            Python Development
+                        </div>
+                        <div class="skill-badge skill-3">
+                            <i class="fa-solid fa-music"></i>
+                            Keyboard Player
+                        </div>
+                        <div class="skill-badge skill-4">
+                            <i class="fa-solid fa-calculator"></i>
+                            Analytical Thinker
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comic-card">
+                    <h3 class="comic-title" style="color: var(--spidey-red);">LATEST ADVENTURES!</h3>
+                    
+                    <div class="adventures-grid">
+                        <a href="https://github.com/dolinbibinkuriakose-web?tab=repositories" target="_blank" class="project-row-item" style="text-decoration: none;">
+                        
+                        <div class="project-row-item">
+                            <div class="project-icon-box" style="background-color: var(--iron-gold);">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <div class="project-info">
+
+                                <h4>S-Calculator</h4>
+                                <p>Scientific shortcuts application</p>
+                            </div>
+                        </div>
+                        </a>
+
+                        <div class="project-row-item">
+                            <div class="project-icon-box" style="background-color: var(--web-blue);">
+                                <i class="fa-solid fa-window-maximize"></i>
+                            </div>
+                            <div class="project-info">
+                                <h4>Tkinter UI</h4>
+                                <p>Custom standalone app wireframes</p>
+                            </div>
+                        </div>
+
+                        <div class="project-row-item">
+                            <div class="project-icon-box" style="background-color: var(--spidey-red);">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <div class="project-info">
+                                <h4>Streamlit Prototype</h4>
+                                <p>Web app dashboard data interface</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="projects-page" class="page-view">
+        <div class="comic-card" style="max-width:1200px; margin: 0 auto;">
+            <h3 class="comic-title">MY PROJECTS ARMORY</h3>
+            <p style="text-align:center; color:#aaa; margin-bottom: 20px;">Deploying scripts and interface modules built for absolute efficiency.</p>
+            
+            <div class="showcase-grid">
+                <div class="comic-card" style="background: #242831; box-shadow: 0 6px 0 var(--comic-black);">
+                    <h4 style="color: var(--iron-gold); font-size:1.4rem; margin-bottom:10px;"><i class="fa-solid fa-calculator"></i> IndTechz S-Calculator</h4>
+                    <p style="color:#ccc; font-size:0.95rem; line-height:1.5;">A professional scientific tool built on Python using Tkinter. Bundled with specialized mathematical function layouts, trigonometric quick shortcuts, and fully compiled via PyInstaller for instant standalone use.</p>
+                </div>
+                <div class="comic-card" style="background: #242831; box-shadow: 0 6px 0 var(--comic-black);">
+                    <h4 style="color: var(--web-blue); font-size:1.4rem; margin-bottom:10px;"><i class="fa-solid fa-chart-simple"></i> Streamlit Analytics</h4>
+                    <p style="color:#ccc; font-size:0.95rem; line-height:1.5;">Interactive UI dashboard architectures configured to load data computations straight onto the browser frame. Built with clean, minimalist cyber-grids.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-page" class="page-view">
+        <div class="comic-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <h3 class="comic-title" style="color: var(--web-blue);">ESTABLISH COMMS</h3>
+            <p style="color:#aaa; margin-bottom:25px;">Systems online. Drop a secure transmission below.</p>
+            
+            <div style="display:flex; flex-direction:column; gap:15px; align-items:center;">
+                <div class="info-pill" style="width:100%; max-width:400px; padding:15px;">
+                    <i class="fa-solid fa-envelope" style="font-size:1.3rem;"></i>
+                    <span style="font-size:1.1rem;">contact@dolinbibinkuriakose.com</span>
+                </div>
+                <a href="https://www.instagram.com/itz._me_dolin" target="_blank" class="info-pill interactive-pill" style="width:100%; max-width:400px; padding:15px;">
+                    <i class="fa-brands fa-instagram" style="font-size:1.3rem; color:var(--spidey-red);"></i>
+                    <span style="font-size:1.1rem;">@itz._me_dolin</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sticky-dock-nav">
+        <button class="dock-btn active-tab" onclick="switchTab('about-page', this)">About Me</button>
+        <button class="dock-btn" onclick="switchTab('projects-page', this)">Projects</button>
+        <button class="dock-btn" onclick="switchTab('contact-page', this)">Contact</button>
+        
+       
+    </div>
+
+
+    <script>
+        function switchTab(pageId, buttonElement) {
+            // 1. Find all sections with the '.page-view' class and hide them
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active-view');
+            });
+
+            // 2. Clear out highlighted colors from all navigation buttons
+            const buttons = document.querySelectorAll('.dock-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active-tab');
+            });
+
+            // 3. Make the requested page view section visible
+            document.getElementById(pageId).classList.add('active-view');
+
+            // 4. Highlight the clicked navigation button active state
+            buttonElement.classList.add('active-tab');
+            
+            // 5. Send viewport smoothly back to the top on click transitions
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
